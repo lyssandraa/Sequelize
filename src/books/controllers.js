@@ -12,9 +12,9 @@ const addBook = async (req, res) => {
 
 const getAllBooks = async (req, res) => {
   try {
-    const book = await Book.findAll();
+    const books = await Book.findAll();
 
-    res.status(200).json({ message: "success", books: getAllBooks });
+    res.status(200).json({ message: "success", books: books });
   } catch (err) {
     res.status(501).json({ message: err.message, err: err });
   }

@@ -7,14 +7,21 @@ const Book = require("./books/model");
 
 const bookRouter = require("./books/routes");
 
+const Author = require("./authors/model");
+
+const authorRouter = require("./authors/routes");
+
 const app = express();
 
 app.use(express.json());
 
 app.use("/books", bookRouter);
 
+app.use("/authors", authorRouter);
+
 const syncTables = () => {
   Book.sync();
+  Author.sync();
 };
 
 app.listen(port, () => {

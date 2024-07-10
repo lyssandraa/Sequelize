@@ -11,6 +11,10 @@ const Author = require("./authors/model");
 
 const authorRouter = require("./authors/routes");
 
+const Genre = require("./genres/model");
+
+const genreRouter = require("./genres/routes");
+
 const app = express();
 
 app.use(express.json());
@@ -19,9 +23,12 @@ app.use("/books", bookRouter);
 
 app.use("/authors", authorRouter);
 
+app.use("/genres", genreRouter);
+
 const syncTables = () => {
   Book.sync();
   Author.sync();
+  Genre.sync();
 };
 
 app.listen(port, () => {

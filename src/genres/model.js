@@ -8,6 +8,7 @@ const Genre = sequelize.define(
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
   },
   { timestamps: false }

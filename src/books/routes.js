@@ -5,6 +5,9 @@ const {
   addBook,
   getAllBooks,
   getBook,
+  getBookAndAuhtor,
+  getBookAndGenre,
+  getBookAuthorAndGenre,
   dynamicUpdateBook,
   deleteBook,
   deleteAllBooks,
@@ -21,6 +24,18 @@ bookRouter.get("/", getAllBooks);
 // GET route to read one book from DB by author //
 
 bookRouter.get("/getBook", getBook);
+
+// GET route to read a book and its author //
+
+bookRouter.get("/getBookAndAuthor/:title", getBookAndAuhtor);
+
+// GET route to read a book and its genre //
+
+bookRouter.get("/getBookAndGenre/:title", getBookAndGenre);
+
+// // GET route to read a book and its author and genre //
+
+bookRouter.get("/getBookAuthorAndGenre/:title", getBookAuthorAndGenre);
 
 // PUT route to dynamically update a book from DB //
 

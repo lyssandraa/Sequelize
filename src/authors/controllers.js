@@ -1,4 +1,5 @@
 const Author = require("./model");
+const Book = require("../books/model");
 
 const addAuthor = async (req, res) => {
   try {
@@ -6,22 +7,23 @@ const addAuthor = async (req, res) => {
 
     res.status(201).json({ message: "success", author: author });
   } catch (err) {
-    res.status(501).json({ message: err.message, err: err });
+    res.status(500).json({ message: err.message, err: err });
   }
 };
 
-const getAuthor = async (req, res) => {
+const getAuthorAndBooks = async (req, res) => {
   try {
     const author = await Author.findOne({
-      where: { name: req.body.name },
+      where: { authorName: req.params.authorName },
+      include: Book,
     });
     res.status(200).json({ message: "success", author: author });
   } catch (err) {
-    res.status(501).json({ message: err.message, err: err });
+    res.status(500).json({ message: err.message, err: err });
   }
 };
 
 module.exports = {
   addAuthor: addAuthor,
-  getAuthor: getAuthor,
+  getAuthorAndBooks: getAuthorAndBooks,
 };

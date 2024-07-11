@@ -1,4 +1,6 @@
 const Book = require("./model");
+const Author = require("../authors/model");
+const Genre = require("../genres/model");
 
 const addBook = async (req, res) => {
   try {
@@ -26,6 +28,42 @@ const getBook = async (req, res) => {
     res.status(200).json({ message: "success", book: book });
   } catch (err) {
     res.status(501).json({ message: err.message, err: err });
+  }
+};
+
+const getBookAndAuhtor = async (req, res) => {
+  try {
+    const book = await Book.findOne({
+      where: { title: req.params.title },
+      include: Author,
+    });
+    res.status(200).json({ message: "success", book: book });
+  } catch (err) {
+    res.status(500).json({ message: err.message, err: err });
+  }
+};
+
+const getBookAndGenre = async (req, res) => {
+  try {
+    const book = await Book.findOne({
+      where: { title: req.params.title },
+      include: Genre,
+    });
+    res.status(200).json({ message: "success", book: book });
+  } catch (err) {
+    res.status(500).json({ message: err.message, err: err });
+  }
+};
+
+const getBookAuthorAndGenre = async (req, res) => {
+  try {
+    const book = await Book.findOne({
+      where: { title: req.params.title },
+      include: [Author, Genre],
+    });
+    res.status(200).json({ message: "success", book: book });
+  } catch (err) {
+    res.status(500).json({ message: err.message, err: err });
   }
 };
 
@@ -75,6 +113,9 @@ module.exports = {
   addBook: addBook,
   getAllBooks: getAllBooks,
   getBook: getBook,
+  getBookAndAuhtor: getBookAndAuhtor,
+  getBookAndGenre: getBookAndGenre,
+  getBookAuthorAndGenre: getBookAuthorAndGenre,
   dynamicUpdateBook: dynamicUpdateBook,
   deleteBook: deleteBook,
   deleteAllBooks: deleteAllBooks,

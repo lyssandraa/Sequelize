@@ -25,10 +25,16 @@ app.use("/authors", authorRouter);
 
 app.use("/genres", genreRouter);
 
-const syncTables = () => {
-  Book.sync();
-  Author.sync();
-  Genre.sync();
+const syncTables = async () => {
+  Book.hasOne(Author);
+  Author.belongsTo(Book);
+
+  Author.hasMany(Book);
+  Book.belongsTo(Author);
+
+  Book.sync({ alter: true });
+  Author.sync({ alter: true });
+  Genre.sync({ alter: true });
 };
 
 app.listen(port, () => {

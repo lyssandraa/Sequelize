@@ -5,7 +5,7 @@ const sequelize = require("../db/connection");
 const Genre = sequelize.define(
   "Genre",
   {
-    name: {
+    genreName: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,

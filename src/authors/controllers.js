@@ -11,6 +11,16 @@ const addAuthor = async (req, res) => {
   }
 };
 
+const getAllAuthors = async (req, res) => {
+  try {
+    const authors = await Author.findAll();
+
+    res.status(200).json({ message: "success", authors: authors });
+  } catch (err) {
+    res.status(501).json({ message: err.message, err: err });
+  }
+};
+
 const getAuthorAndBooks = async (req, res) => {
   try {
     const author = await Author.findOne({
@@ -23,7 +33,21 @@ const getAuthorAndBooks = async (req, res) => {
   }
 };
 
+const deleteAllAuthors = async (req, res) => {
+  try {
+    await Author.destroy({
+      truncate: true,
+    });
+
+    res.status(204).send;
+  } catch (err) {
+    res.status(501).json({ message: err.message, err: err });
+  }
+};
+
 module.exports = {
   addAuthor: addAuthor,
+  getAllAuhtors: getAllAuthors,
   getAuthorAndBooks: getAuthorAndBooks,
+  deleteAllAuthors: deleteAllAuthors,
 };
